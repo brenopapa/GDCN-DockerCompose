@@ -7,3 +7,5 @@ After both containers are running, just hit localhost:3000 and start using GoodD
 The docker compose file might need some IP adjustments.
 
 All images can be found in docker hub.
+
+Check out https://gooddata.cn/ for more details on the Analytics Engine itself.
