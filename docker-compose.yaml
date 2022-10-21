@@ -1,0 +1,37 @@
+version: "3.7"
+services:
+    gooddata-cn:
+        image: gooddata/gooddata-cn-ce
+        ports:
+            - "3000:3000"
+        networks:
+            local:
+                ipv4_address: 192.168.15.15
+        environment:
+                LICENSE_AND_PRIVACY_POLICY_ACCEPTED: "YES"
+        depends_on:
+            - postgres
+    postgres:
+        image: postgres:latest
+        restart: always
+        environment:
+            POSTGRES_USER: gooddata
+            POSTGRES_PASSWORD: gooddata
+            POSTGRES_DB: gooddata
+        ports: 
+            - "5432:5432"
+        volumes:
+            - postgres:/var/lib/postgresql/data
+            - ./script/postgres:/docker-entrypoint-initdb.d/
+        networks:
+            local:
+                ipv4_address: 192.168.15.10
+networks:
+    local:
+        ipam:
+            driver: default
+            config:
+                - subnet: "192.168.15.0/24"
+volumes:
+    postgres:
+        driver: local
