@@ -11,6 +11,17 @@ services:
                 LICENSE_AND_PRIVACY_POLICY_ACCEPTED: "YES"
         depends_on:
             - postgres
+    cloudbeaver:
+        image: dbeaver/cloudbeaver
+        ports:
+            - "8081:8978"
+        networks:
+            local:
+                ipv4_address: 192.168.15.11
+        volumes:
+            - /opt/cloudbeaver/workspace dbeaver/cloudbeaver
+        depends_on:
+            - postgres
     postgres:
         image: postgres:latest
         restart: always
